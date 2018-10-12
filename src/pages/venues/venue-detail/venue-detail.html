@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-navbar color="blue" class="white-text">
+        <ion-title>Partner Detail</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content *ngIf="loaded" class="content">
+    <!--*********** Image header  ***********-->
+    <div class="detail-header">
+        <h2 class="detail-name ">{{ venue.venue_name }}</h2>
+    </div>
+
+    <!--***********  Description ***********-->
+    <ion-card>
+        <ion-card-header no-margin>
+            <ion-list>
+                <ion-list-header>
+                    <h2>Venue Details</h2>
+                </ion-list-header>
+                <ion-item>
+                    <ion-icon name="map" item-left></ion-icon>
+                    <h2>{{ venue.type }}</h2>
+                    <p>Type</p>
+                </ion-item>
+                <ion-item>
+                    <ion-icon name="calendar" item-left></ion-icon>
+                    <h2>
+                        {{ venue.add1 }}
+                        <br /> {{ venue.city }} {{ venue.state }} {{ venue.zip }}
+                        <br /> {{ venue.phone }}
+                    </h2>
+                    <p>Address</p>
+                </ion-item>
+            </ion-list>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-item no-lines>
+                    <button (click)="addNote()" type="button" color="orange" ion-button full>Add Notes</button>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

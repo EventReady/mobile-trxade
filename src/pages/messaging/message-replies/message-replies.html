@@ -1,0 +1,49 @@
+<ion-header *ngIf="!hideHeader">
+	<ion-navbar color="primary" class="white-text">
+		<ion-title>Messaging</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+	<ion-list *ngIf="loaded">
+		<ion-item-group>
+			<ul class="timeline">
+				<li *ngFor="let reply of replies">
+					<img src="{{defaultProfilePic}}" alt="" class="timeline-thumb pop-in">
+					<div class="timeline-item">
+						<p><strong>{{ reply.sender }}</strong></p>
+						<p>{{ reply.message }}</p>
+						<div class="timeline-stats">
+							<ion-icon name="md-envelope"></ion-icon>
+							<span class="pos-absolute-right">
+								<ion-icon name="clock"></ion-icon> {{ reply.create_date | date:'short' }}
+							</span>
+						</div>
+					</div>
+				</li>
+				<li>
+					<img src="{{defaultProfilePic}}" alt="" class="timeline-thumb pop-in">
+					<div class="timeline-item">
+						<p><strong>{{ message.sender }}</strong></p>
+						<p>{{ message.message }}</p>
+						<div class="timeline-stats">
+							<ion-icon name="md-envelope"></ion-icon>
+							<span class="pos-absolute-right">
+								<ion-icon name="clock"></ion-icon> {{ message.create_date | date:'short' }}
+							</span>
+						</div>
+					</div>
+				</li>
+
+			</ul>
+		</ion-item-group>
+	</ion-list>
+</ion-content>
+<ion-footer>
+	<ion-toolbar>
+		<button (click)="sendResponse()" ion-button full color="primary">
+			Send Response &nbsp;
+			<ion-icon name="md-send"></ion-icon>
+		</button>
+	</ion-toolbar>
+</ion-footer>

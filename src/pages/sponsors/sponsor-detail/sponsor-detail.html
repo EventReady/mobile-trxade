@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-navbar color="primary" class="white-text">
+        <ion-title>Sponsor Detail</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content class="content">
+    <div class="detail-header">
+        <div class="background">
+            <div id="profile1-info" class="test-class" padding *ngIf="loaded">
+                <img src="https://api.eventready.com/assets/york/sponsors/{{ sponsor.image }}" class="edit-avatar pop-in" alt="">
+                <h3 id="profile1-name">{{ sponsor.name }} </h3>
+            </div>
+        </div>
+    </div>
+    <ion-list no-lines text-wrap *ngIf="loaded">
+        <ion-list-header>
+            <p>{{ sponsor.description }}</p>
+        </ion-list-header>
+        <ion-list no-lines>
+            <ion-item>
+                <ion-icon name="md-link" item-left></ion-icon>
+                <h2>
+                    <a (click)="goToSponsor(sponsor.url)">{{ sponsor.url }}</a>
+                </h2>
+                <p>Website</p>
+            </ion-item>
+            <ion-item no-lines>
+                <button (click)="addNote()" type="button" color="orange" ion-button full>Add Notes</button>
+            </ion-item>
+        </ion-list>
+    </ion-list>
+</ion-content>

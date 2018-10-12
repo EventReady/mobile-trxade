@@ -1,0 +1,26 @@
+<ion-header no-border>
+    <ion-navbar color="primary" class="white-text">
+        <ion-title>App Info</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="closeModal()">
+				<ion-icon item-right name="md-close"></ion-icon>
+			</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <button ion-item tappable (click)="appInfo()">
+			App Info
+		</button>
+        <button ion-item tappable (click)="sendHelpEmail()">
+			Need Help?
+		</button>
+        <button ion-item tappable (click)="shareApp()">
+			Share App
+		</button>
+        <button ion-item tappable (click)="checkUpdates()">
+			Get App Updates
+		</button>
+    </ion-list>
+</ion-content>

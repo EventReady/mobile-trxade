@@ -1,0 +1,65 @@
+<ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+	<div class="login-container">
+		<img class="logo" src="./assets/main-logo.png" />
+		<!--*********** Form ***********-->
+		<form [formGroup]="loginForm" (submit)="login()" novalidate *ngIf="loaded && showAttendeeLogin">
+			<ion-item>
+				<ion-label floating>Registration ID</ion-label>
+				<ion-input tappable color="light" #email type="text" formControlName="email" [class.invalid]="!loginForm.controls.email.valid &&loginForm.controls.email.dirty"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label floating>Password</ion-label>
+				<ion-input tappable #password type="password" (ionFocus)="scrollToBottom()" formControlName="password"
+				 [class.invalid]="!loginForm.controls.password.valid &&loginForm.controls.password.dirty"></ion-input>
+			</ion-item>
+			<ion-item class="error-message">
+				<p *ngIf="!loginForm.controls.email.valid  && loginForm.controls.email.dirty">*Please enter a valid Registration
+					ID.
+				</p>
+				<p *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">*Password needs more than 6
+					characters.
+				</p>
+			</ion-item>
+			<div class="submit-box">
+				<button ion-button block type="submit" color="blue2">Log in</button>
+				<button ion-button type="button" block icon-left color="light" outline (click)="forgot()" margin-top>
+					Forgot Password
+				</button>
+				<a *ngIf="hasSpeakerLogin" (click)="speakerLogin()" ion-button clear full type="submit" color="base">Speaker Login</a>
+				<a *ngIf="aboutConference.length" class="bottom" ion-button clear full color="light" href="{{ aboutConference }}">
+					<ion-icon name="information-circle"></ion-icon>&nbsp;&nbsp;About The Conference
+				</a>
+			</div>
+		</form>
+		<form [formGroup]="loginSpeakerForm" (submit)="loginSpeaker()" novalidate *ngIf="loaded && showSpeakerLogin">
+			<h2>Speaker Portal</h2>
+			<ion-item>
+				<ion-label floating>Username</ion-label>
+				<ion-input tappable color="light" #email type="text" formControlName="email" [class.invalid]="!loginSpeakerForm.controls.email.valid &&loginSpeakerForm.controls.email.dirty"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label floating>Password</ion-label>
+				<ion-input tappable #password type="password" (ionFocus)="scrollToBottom()" formControlName="password"
+				 [class.invalid]="!loginSpeakerForm.controls.password.valid &&loginSpeakerForm.controls.password.dirty"></ion-input>
+			</ion-item>
+			<ion-item class="error-message">
+				<p *ngIf="!loginSpeakerForm.controls.email.valid  && loginSpeakerForm.controls.email.dirty">*Please enter a valid
+					username.
+				</p>
+				<p *ngIf="!loginSpeakerForm.controls.password.valid && loginSpeakerForm.controls.password.dirty">*Password needs
+					more than 6 characters.
+				</p>
+			</ion-item>
+			<div class="submit-box">
+				<button ion-button block type="submit" color="blue2">Log in</button>
+				<button ion-button type="button" block icon-left color="light" outline (click)="forgotSpeaker()" margin-top>
+					Forgot Password
+				</button>
+				<a (click)="AttendeeLogin()" ion-button clear full type="submit" color="base">Attendee Login</a>
+				<a *ngIf="aboutConference.length" class="bottom" ion-button clear full color="light" href="{{ aboutConference }}">
+					<ion-icon name="information-circle"></ion-icon>&nbsp;&nbsp;About The Conference
+				</a>
+			</div>
+		</form>
+	</div>
+</ion-content>

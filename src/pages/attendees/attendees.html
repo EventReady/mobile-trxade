@@ -1,0 +1,35 @@
+<ion-header>
+	<ion-navbar color="primary" class="white-text">
+		<ion-title>Attendees</ion-title>
+	</ion-navbar>
+	<ion-toolbar no-border-top color="primary">
+		<ion-searchbar debounce="750" [showCancelButton]="true" (ionCancel)="cancelSearch( $event )" (ionInput)="getItems( $event )"></ion-searchbar>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<!--*********** List  ***********-->
+	<ion-list *ngIf="loaded">
+		<button ion-item *ngFor="let item of attendees" (click)="goToPage( item )">
+			<h2>{{ item.fullname }}</h2>
+			<p>
+				<em>{{ item.email }}</em>
+			</p>
+		</button>
+	</ion-list>
+
+	<ion-list *ngIf="isSearching">
+		<button ion-item *ngFor="let item of filteredList" (click)="goToPage( item )">
+			<h2>{{ item.fullname }}</h2>
+			<p>
+				<em>{{ item.email }}</em>
+			</p>
+		</button>
+	</ion-list>
+	<div *ngIf="loaded">
+		<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+			<ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more attendess..."></ion-infinite-scroll-content>
+		</ion-infinite-scroll>
+	</div>
+
+</ion-content>

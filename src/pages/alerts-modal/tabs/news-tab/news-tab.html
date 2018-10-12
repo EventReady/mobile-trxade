@@ -1,0 +1,19 @@
+<ion-content>
+	<!--*********** List  ***********-->
+	<ion-list *ngIf="loaded">
+		<button ion-item tappable *ngFor="let item of info" (click)="goToDetail( item.title, item.description )">
+			<h2>{{ item.title }}</h2>
+			<p>{{ formatHTML( item.description ) | truncate:[ 50 ]}} </p>
+		</button>
+	</ion-list>
+	<ion-card *ngIf="loaded && !info.length" color="danger" class="rainbow-content">
+		<ion-card-content>
+			<ion-card-title>
+				No News
+			</ion-card-title>
+			<p>
+				There currently is no news to show.
+			</p>
+		</ion-card-content>
+	</ion-card>
+</ion-content>

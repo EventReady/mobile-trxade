@@ -1,0 +1,53 @@
+<ion-header>
+	<ion-navbar color="primary" class="white-text">
+		<ion-title>My Sessions</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<div class="detail-header">
+		<div class="background">
+			<div id="profile1-info" class="test-class" padding *ngIf="loaded">
+				<div *ngIf="speaker.photo_file.length">
+					<img src="https://iplanprime.eventready.com/docs/download/photo_files/{{ speaker.photo_file }}" class="edit-avatar pop-in"
+					 alt="">
+				</div>
+				<div *ngIf="!speaker.photo_file.length">
+					<img src="https://mobile.eventready.com/files/eventready/nobody_m.original.gif" class="edit-avatar pop-in" alt="">
+				</div>
+				<h3 id="profile1-name">{{ speaker.first_name }} {{ speaker.last_name }} <br /><em><small>(your speaker profile)</small></em>
+				</h3>
+				<p *ngIf="speaker.title.length" class="profile1-description">{{ speaker.title }}</p>
+				<p *ngIf="speaker.company.length" class="profile1-description">of {{ speaker.company }}</p>
+			</div>
+		</div>
+	</div>
+	<ion-list no-lines text-wrap *ngIf="loaded">
+		<ion-list-header>
+			<p>Bio: {{ speaker.bio }}</p>
+		</ion-list-header>
+		<hr />
+		<ion-list-header>
+			<h2>{{ speaker.first_name }} {{ speaker.last_name }} Sessions</h2>
+		</ion-list-header>
+		<ion-card *ngIf="loaded && !sessions.length" color="danger" class="rainbow-content">
+			<ion-card-content>
+				<ion-card-title>
+					No Available Sessions
+				</ion-card-title>
+				<p>
+					There are no available session for this speaker.
+				</p>
+			</ion-card-content>
+		</ion-card>
+		<button ion-item tappable *ngFor="let item of sessions" (click)="goToDetail( item.session_id )">
+			<p>
+				<small>{{ item.start_date | date: "M/d/y" }} {{ item.start_time | date: "h:mm a" }}</small>
+			</p>
+			<h2>{{ item.session_name }}</h2>
+			<p>
+				<em>{{ item.room }}</em>
+			</p>
+		</button>
+
+	</ion-list>
+</ion-content>

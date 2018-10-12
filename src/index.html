@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>2018 Educator Conference Mobile App</title>
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4e8ef7">
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src * 'unsafe-inline'; img-src * data: blob: 'unsafe-inline'; frame-src *; style-src * 'unsafe-inline'">-->
+    <!-- add to homescreen for ios -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="cordova.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <link href="build/main.css" rel="stylesheet">
+
+    <style>
+        .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) {
+            height: calc(44px + constant(safe-area-inset-top));
+        }
+        
+        .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader)>* {
+            margin-top: constant(safe-area-inset-top);
+        }
+        
+        div.tab-nav.tabs {
+            height: calc(49px + constant(safe-area-inset-bottom));
+        }
+        
+        ion-content.padding.scroll-content.ionic-scroll.has-header.has-tabs {
+            top: calc(64px + constant(safe-area-inset-top));
+        }
+    </style>
+</head>
+
+<body>
+    <ion-app></ion-app>
+    <script src="build/polyfills.js"></script>
+    <script src="build/vendor.js"></script>
+    <script src="build/main.js"></script>
+</body>
+
+</html>

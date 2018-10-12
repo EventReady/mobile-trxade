@@ -1,0 +1,75 @@
+<ion-header>
+	<ion-navbar color="primary" class="white-text">
+		<ion-title>Tell A Friend</ion-title>
+	</ion-navbar>
+</ion-header>
+
+
+<ion-content no-padding>
+	<form [formGroup]="messageForm" (ngSubmit)="submitForm(messageForm.value)">
+		<ion-list>
+			<ion-item>
+				<ion-label floating>To :</ion-label>
+				<ion-input type="text" value="" [formControl]="messageForm.controls['to']" [ngClass]="{'error-border':!messageForm.controls['to'].valid}"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label floating>Message title :</ion-label>
+				<ion-input type="text" value="" [formControl]="messageForm.controls['title']" [ngClass]="{'error-border':!messageForm.controls['title'].valid}"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label floating>Message body :</ion-label>
+				<ion-textarea type="text" row="10" [formControl]="messageForm.controls['body']" [ngClass]="{'error-border':!messageForm.controls['body'].valid}"></ion-textarea>
+			</ion-item>
+		</ion-list>
+
+		<div margin>
+			<div class="error-box" *ngIf="messageForm.controls['to'].hasError('required') && messageForm.controls['to'].touched">*
+				Message to is required!</div>
+			<div class="error-box" *ngIf="messageForm.controls['to'].hasError('minlength') && messageForm.controls['to'].touched">*
+				Minimum message to length is 5!</div>
+			<div class="error-box" *ngIf="messageForm.controls['to'].hasError('maxlength') && messageForm.controls['to'].touched">*
+				Maximum message to length is 10!</div>
+
+			<div class="error-box" *ngIf="messageForm.controls['title'].hasError('required') && messageForm.controls['title'].touched">*
+				Message title is required!</div>
+			<div class="error-box" *ngIf="messageForm.controls['title'].hasError('minlength') && messageForm.controls['title'].touched">*
+				Minimum message title length is 5!</div>
+			<div class="error-box" *ngIf="messageForm.controls['title'].hasError('maxlength') && messageForm.controls['title'].touched">*
+				Maximum message title length is 10!</div>
+
+			<div class="error-box" *ngIf="messageForm.controls['body'].hasError('required') && messageForm.controls['body'].touched">*
+				Message body is required!</div>
+			<div class="error-box" *ngIf="messageForm.controls['body'].hasError('minlength') && messageForm.controls['body'].touched">*
+				Minimum message body length is 5!</div>
+			<div class="error-box" *ngIf="messageForm.controls['body'].hasError('maxlength') && messageForm.controls['body'].touched">*
+				Maximum message body length is 10!</div>
+		</div>
+		<ion-footer>
+			<div padding>
+				<button type="submit" color="orange" [disabled]="!messageForm.valid" ion-button full>Submit</button>
+			</div>
+		</ion-footer>
+	</form>
+</ion-content>
+
+<ion-footer>
+	<ion-toolbar>
+		<ion-title>
+			<ion-buttons start>
+				<button class="footer-button" tappable eventReadyNavigate page="DashboardPage" ion-button icon-only color="primary">
+					<ion-icon name="home"></ion-icon>
+				</button>
+				<button class="footer-button" eventReadyNavigate page="SchedulePage" ion-button icon-only color="primary">
+					<ion-icon name="md-calendar"></ion-icon>
+				</button>
+
+				<button class="footer-button" eventReadyNavigate page="SpeakersPage" ion-button icon-only color="primary">
+					<ion-icon name="md-people"></ion-icon>
+				</button>
+				<button class="footer-button" eventReadyNavigate page="MyProfilePage" ion-button icon-only color="primary">
+					<ion-icon name="md-person"></ion-icon>
+				</button>
+			</ion-buttons>
+		</ion-title>
+	</ion-toolbar>
+</ion-footer>

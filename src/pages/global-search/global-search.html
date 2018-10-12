@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar color="primary" class="white-text">
+        <ion-title>{{ eventName }} App Search</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+    <h5 padding>Search Results for <em>{{ term }}</em></h5>
+
+    <ion-list *ngIf="loaded">
+        <ion-item-group *ngFor="let group of output | groupBy: 'searchType'">
+            <ion-item-divider color="light">
+                {{ group.key }}
+            </ion-item-divider>
+            <button ion-item tappable *ngFor="let item of group.list" (click)="goToPage( group.key, item )">
+				<p>
+					{{ item.output }}
+				</p>
+			</button>
+        </ion-item-group>
+    </ion-list>
+</ion-content>

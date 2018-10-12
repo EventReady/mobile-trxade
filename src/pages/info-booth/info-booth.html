@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-navbar color="primary" class="white-text">
+        <ion-buttons start>
+            <button (click)="backToDashboard()" ion-button icon-only>
+				<ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon> Back
+			</button>
+        </ion-buttons>
+        <ion-title>Info Booth</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <!--*********** List  ***********-->
+    <ion-list *ngIf="loaded">
+        <button ion-item tappable *ngFor="let item of info" (click)="goToDetail( item.title, item.description )">
+			<h2>{{ item.title }}</h2>
+			<p>{{ formatHTML( item.description ) | truncate:[ 50 ]}} </p>
+		</button>
+    </ion-list>
+    <ion-card *ngIf="loaded && !info.length" color="danger" class="rainbow-content">
+        <ion-card-content>
+            <ion-card-title>
+                No Information Available At This Time
+            </ion-card-title>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

@@ -1,0 +1,43 @@
+<ion-header no-border>
+	<ion-navbar transparent color="light">
+		<ion-buttons start>
+			<button ion-button color="danger" (click)="back()">
+				<ion-icon class="back-button-icon icon icon-ios back-button-icon-ios ion-ios-arrow-back"></ion-icon>
+				Back
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content [ngStyle]="{'background-image': 'url(' + backgroundImage +')'}">
+	<div class="login-container">
+		<img class="logo" src="./assets/main-logo.png" />
+		<form *ngIf="!showSpeaker" [formGroup]="resetPasswordForm" (submit)="resetPassword()" novalidate>
+			<ion-item>
+				<ion-label stacked>Registration ID</ion-label>
+				<ion-input tappable formControlName="regid" type="text" placeholder="Your Registration ID" [class.invalid]="!resetPasswordForm.controls.regid.valid && resetPasswordForm.controls.regid.dirty"></ion-input>
+			</ion-item>
+			<ion-item class="error-message">
+				<p *ngIf="!resetPasswordForm.controls.regid.valid  && resetPasswordForm.controls.regid.dirty">Please enter a valid
+					Registration ID.</p>
+			</ion-item>
+			<button ion-button block type="submit" color="blue2">
+				Reset your Password
+			</button>
+		</form>
+		<form *ngIf="showSpeaker" [formGroup]="resetSpeakerPasswordForm" (submit)="resetSpeakerPassword()" novalidate>
+			<ion-item>
+				<ion-label stacked>Username</ion-label>
+				<ion-input tappable formControlName="username" type="text" placeholder="Your Username" [class.invalid]="!resetSpeakerPasswordForm.controls.username.valid && resetSpeakerPasswordForm.controls.username.dirty"></ion-input>
+			</ion-item>
+			<ion-item class="error-message">
+				<p *ngIf="!resetSpeakerPasswordForm.controls.username.valid  && resetSpeakerPasswordForm.controls.username.dirty">Please
+					enter a valid username.</p>
+			</ion-item>
+			<button ion-button block type="submit" color="blue2">
+				Reset your Password
+			</button>
+		</form>
+
+	</div>
+</ion-content>

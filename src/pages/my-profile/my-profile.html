@@ -1,0 +1,36 @@
+<ion-header>
+	<ion-navbar color="primary" class="white-text">
+		<ion-title>Profile</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content fullscreen="true" no-padding *ngIf="loaded">
+	<div class="profile-box">
+		<div text-center class="background">
+			<img src="https://mobile.eventready.com/files/eventready/nobody_m.original.gif" class="edit-avatar pop-in" alt="">
+			<p class="name-text">{{ profile.first_name }} {{ profile.last_name }}</p>
+		</div>
+	</div>
+	<div padding>
+		<ion-list no-lines>
+			<ion-item>
+				<ion-icon name="ios-mail" item-left></ion-icon>
+				<h2>{{ profile.email }}</h2>
+				<p>E-mail</p>
+			</ion-item>
+			<ion-item>
+				<ion-icon name="ios-card" item-left></ion-icon>
+				<h2>{{ profile.first_name }}</h2>
+				<p>Name</p>
+			</ion-item>
+			<ion-item>
+				<ion-icon name="ios-call" item-left></ion-icon>
+				<h2>{{ profile.cell_phone }}</h2>
+				<p>Mobile phone</p>
+			</ion-item>
+		</ion-list>
+		<button ion-button block color="blue2" (click)="logout()">
+			Logout
+		</button>
+	</div>
+</ion-content>

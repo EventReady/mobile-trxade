@@ -1,0 +1,18 @@
+<ion-header no-border>
+	<ion-navbar color="primary" class="white-text">
+		<ion-title>Your Messages</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only (click)="closeModal()">
+				<ion-icon item-right name="md-close"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<ion-tabs tabsPlacement="top">
+		<ion-tab tabTitle="My Messages" tabBadge="" [root]="tab1Root" [rootParams]="tabParams"></ion-tab>
+		<ion-tab tabTitle="Feed Alerts" tabBadge="" [root]="tab2Root"></ion-tab>
+		<ion-tab tabTitle="Show News" tabBadge="" [root]="tab3Root"></ion-tab>
+	</ion-tabs>
+</ion-content>

@@ -1,0 +1,42 @@
+<ion-header *ngIf="!hideHeader">
+    <ion-navbar color="primary" class="white-text">
+        <ion-title>Messaging</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+    <ion-list>
+        <ion-item-sliding *ngFor="let message of messages">
+            <button ion-item tappable ion-item (click)="goToMessage( message.id )">
+				<ion-avatar item-left>
+					<img src="https://mobile.eventready.com/files/eventready/nobody_m.original.gif">
+				</ion-avatar>
+				<h2>to: {{ message.to }}</h2>
+				<h3>title: {{ message.subject }}</h3>
+				<p>body: {{ message.message }}</p>
+			</button>
+            <ion-item-options>
+                <button ion-button color="danger" icon-left (click)="deleteMessage( message.id )">
+					<ion-icon name="ios-trash"></ion-icon>
+					Delete
+				</button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+    <ion-card *ngIf="loaded && !messages.length" color="danger" class="rainbow-content">
+        <ion-card-content>
+            <ion-card-title>
+                No Messages
+            </ion-card-title>
+            <p>
+                You currently have no new messages.
+            </p>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-fab right bottom (click)="createMessage()">
+        <button ion-fab color="green">
+			<ion-icon name="md-add"></ion-icon>
+		</button>
+    </ion-fab>
+</ion-content>

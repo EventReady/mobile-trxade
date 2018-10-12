@@ -1,0 +1,65 @@
+<ion-header>
+	<ion-navbar color="primary" class="white-text">
+		<ion-title *ngIf="loaded">{{ venue.title }}</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content *ngIf="loaded">
+	<!--*********** Image header  ***********-->
+	<div class="detail-header" *ngIf="loaded" [ngStyle]="{ 'background-image' : 'url(' +  venue.backgroundImage + ')' }">
+		<h2 class="detail-name" *ngIf="loaded">{{ venue.title }}</h2>
+	</div>
+	<!--***********  Description ***********-->
+	<ion-card *ngIf="loaded">
+		<ion-card-header no-margin>
+			<ion-list>
+				<ion-list-header>
+					<h2>Venue Details</h2>
+				</ion-list-header>
+				<ion-item>
+					<ion-icon name="map" item-left></ion-icon>
+					<h2>{{ venue.type }}</h2>
+					<p>Type</p>
+				</ion-item>
+				<ion-item>
+					<ion-icon name="calendar" item-left></ion-icon>
+					<h2 [innerHTML]="venue.address">
+					</h2>
+					<p>Address</p>
+				</ion-item>
+				<ion-item>
+					<ion-icon name="contacts" item-left></ion-icon>
+					<h2>
+						<strong>
+							<a href="{{ venue.linkHref }}">{{ venue.linkTitle }}</a>
+						</strong>
+					</h2>
+					<p>Things To Do</p>
+				</ion-item>
+			</ion-list>
+		</ion-card-header>
+		<ion-card-content>
+			<ion-grid>
+				<ion-row class="callout-block" *ngIf="loaded && venue.venueMaps.length">
+					<ion-col class="callout" style="padding-bottom: 18px;">
+						<div>
+							<h2 class="top-tag highlight-2 primary">Venue Maps</h2>
+						</div>
+						<div text-center>
+							<div *ngFor="let map of venue.venueMaps; let i = index">
+								<img style="display: none" [src]="map.map" #i />
+								<button ion-button small class="view-info-btn dark" color="primary" (click)="goToMap( i )">{{
+									map.title }}</button>
+							</div>
+						</div>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+
+			<ion-list>
+				<ion-item no-lines>
+					<button (click)="addNote()" type="button" color="orange" ion-button full>Add Notes</button>
+				</ion-item>
+			</ion-list>
+		</ion-card-content>
+	</ion-card>
+</ion-content>

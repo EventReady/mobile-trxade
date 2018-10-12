@@ -1,0 +1,37 @@
+<ion-header no-border>
+    <ion-navbar color="light" class="white-text">
+        <ion-title>Contact list</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="closeModal()">
+				<ion-icon item-right name="md-close"></ion-icon>
+			</button>
+        </ion-buttons>
+    </ion-navbar>
+    <ion-toolbar no-border-top>
+        <ion-searchbar debounce="750" [showCancelButton]="true" (ionCancel)="cancelSearch( $event )" (ionInput)="getItems( $event )"></ion-searchbar>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding>
+    <ion-list *ngIf="loaded" no-border style="margin-top:30px">
+        <ion-item tappable *ngFor="let contact of contacts" (click)="selectContact( contact.full_name, contact.reg_id, 'https://mobile.eventready.com/files/eventready/nobody_m.original.gif' )">
+            <ion-avatar item-left>
+                <img src="https://mobile.eventready.com/files/eventready/nobody_m.original.gif" />
+            </ion-avatar>
+            <h2>{{ contact.full_name }}</h2>
+            <p>Company: {{ contact.company }}</p>
+        </ion-item>
+    </ion-list>
+    <ion-list *ngIf="isSearching">
+        <ion-item tappable *ngFor="let contact of filteredList" (click)="selectContact( contact.full_name, contact.reg_id, 'https://mobile.eventready.com/files/eventready/nobody_m.original.gif' )">
+            <ion-avatar item-left>
+                <img src="https://mobile.eventready.com/files/eventready/nobody_m.original.gif" />
+            </ion-avatar>
+            <h2>{{ contact.full_name }}</h2>
+            <p>Company: {{ contact.company }}</p>
+        </ion-item>
+
+    </ion-list>
+
+</ion-content>

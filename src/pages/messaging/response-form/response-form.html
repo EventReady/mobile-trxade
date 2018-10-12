@@ -1,0 +1,25 @@
+<ion-header *ngIf="!hideHeader">
+    <ion-navbar color="primary" class="white-text">
+        <ion-title>Messaging</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content no-padding>
+    <form [formGroup]="messageForm" (ngSubmit)="submitForm(messageForm.value)">
+        <ion-list no-border>
+            <ion-item>
+                <ion-label floating>Message body :</ion-label>
+                <ion-textarea type="text" row="10" [formControl]="messageForm.controls['body']" [ngClass]="{'error-border':!messageForm.controls['body'].valid}"></ion-textarea>
+                <div margin>
+                    <div class="error-box" *ngIf="messageForm.controls['body'].hasError('required') && messageForm.controls['body'].touched">* Message body is required!</div>
+                </div>
+            </ion-item>
+            <ion-item>
+                <div padding>
+                    <button type="submit" color="orange" [disabled]="!messageForm.valid" ion-button full>Submit</button>
+                </div>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>

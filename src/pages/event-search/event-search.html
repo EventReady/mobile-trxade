@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-navbar color="primary" class="white-text">
+        <ion-title>Event Search</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="closeModal()">
+				<ion-icon item-right name="md-close"></ion-icon>
+			</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-list style="width:100%">
+        <ion-item>
+            <ion-label floating>Enter Search Here</ion-label>
+            <ion-input #search type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <button (click)="getItems( search )" large ion-button full icon-right>
+				Search {{ eventName }}
+				<ion-icon name="md-search"></ion-icon>
+			</button>
+        </ion-item>
+    </ion-list>
+
+    <div style="">
+        <h5 padding *ngIf="loaded">Search Results for <em>{{ search.value }}</em></h5>
+        <ion-list *ngIf="loaded">
+            <ion-item-group *ngFor="let group of output | groupBy: 'searchType'">
+                <ion-item-divider color="light" sticky>
+                    {{ group.key }}
+                </ion-item-divider>
+                <button ion-item tappable *ngFor="let item of group.list" (click)="goToPage( group.key, item )">
+					<p>
+						{{ item.output }}
+					</p>
+				</button>
+            </ion-item-group>
+        </ion-list>
+
+    </div>
+</ion-content>

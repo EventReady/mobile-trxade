@@ -1,0 +1,25 @@
+exhibitors {
+    ion-list ion-label {
+        h2 {
+            font-size: 18px;
+            margin: 2p 0;
+        }
+    }
+    ion-thumbnail {
+        width: 50px;
+    }
+    .circle {
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 20px;
+        width: 50px;
+        height: 50px;
+        background: #ddd;
+        position: relative;
+        text-align: center;
+        .text {
+            position: relative;
+            top: 16px;
+        }
+    }
+}

@@ -1,0 +1,62 @@
+<ion-header>
+	<ion-navbar color="primary" class="white-text">
+		<ion-title>Exhibitors</ion-title>
+	</ion-navbar>
+	<ion-toolbar no-border-top color="primary">
+		<ion-searchbar debounce="750" [showCancelButton]="true" (ionCancel)="cancelSearch( $event )" (ionInput)="getItems( $event )"></ion-searchbar>
+	</ion-toolbar>
+</ion-header>
+<ion-content>
+	<!--*********** List  ***********-->
+	<ion-list *ngIf="loaded">
+		<ion-item *ngFor="let item of exhibitors">
+			<ion-label>
+				<h2>{{ item.exhibitor }}</h2>
+				<p>Booth Number {{ item.booth_number }}</p>
+			</ion-label>
+			<ion-note item-end>
+				<button ion-button icon-only tappable clear (click)="markAsFavorite( item.exhib_id )">
+					<ion-icon name="md-heart" *ngIf="visible.includes(item.exhib_id)"></ion-icon>
+					<ion-icon name="md-heart-outline" *ngIf="!visible.includes(item.exhib_id)"></ion-icon>
+				</button>
+			</ion-note>
+			<ion-note item-end>
+				<button ion-button icon-only tappable clear (click)="goToDetail( item.exhib_id )">
+					View
+				</button>
+			</ion-note>
+		</ion-item>
+	</ion-list>
+	<ion-card *ngIf="loaded && !exhibitors.length" color="danger" class="rainbow-content">
+		<ion-card-content>
+			<ion-card-title>
+				No Available Exhibitors
+			</ion-card-title>
+			<p>
+				There are no available exhibitors at this time.
+			</p>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-list *ngIf="isSearching">
+		<ion-item *ngFor="let item of filteredList">
+			<ion-label>
+				<h2>{{ item.exhibitor }}</h2>
+				<p>Booth Number {{ item.booth_number }}</p>
+			</ion-label>
+			<ion-note item-end>
+				<button ion-button icon-only tappable clear (click)="markAsFavorite( item.exhib_id )">
+					<ion-icon name="md-heart" *ngIf="visible.includes(item.exhib_id)"></ion-icon>
+					<ion-icon name="md-heart-outline" *ngIf="!visible.includes(item.exhib_id)"></ion-icon>
+				</button>
+			</ion-note>
+			<ion-note item-end>
+				<button ion-button icon-only tappable clear (click)="goToDetail( item.exhib_id )">
+					View
+				</button>
+			</ion-note>
+		</ion-item>
+
+	</ion-list>
+
+</ion-content>

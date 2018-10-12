@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-navbar color="primary" class="white-text">
+        <ion-title>Exhibitor Detail</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content *ngIf="loaded" class="content">
+    <!--*********** Image header  ***********-->
+    <div class="detail-header ">
+        <div class="background">
+            <h2 class="detail-name ">{{ exhibitor.exhibitor }}</h2>
+        </div>
+    </div>
+
+    <!--***********  Description ***********-->
+    <ion-card>
+        <ion-card-header no-margin>
+            <ion-list>
+                <ion-list-header>
+                    <h2>Exhibitor Details</h2>
+                </ion-list-header>
+                <ion-item>
+                    <ion-icon name="map" item-left></ion-icon>
+                    <h2>Booth {{ exhibitor.booth_number }}</h2>
+                    <p>Booth</p>
+                </ion-item>
+                <!--
+                <ion-item>
+                    <ion-icon name="calendar" item-left></ion-icon>
+                    <h2>
+                        {{ exhibitor.add1 }}
+                        <br /> {{ exhibitor.city }} {{ exhibitor.state }} {{ exhibitor.zip }}
+                        <br /> {{ exhibitor.phone }}
+                    </h2>
+                    <p>Address</p>
+				</ion-item>
+				-->
+                <ion-item *ngIf="exhibitor.web_url.length">
+                    <h2>
+                        <a href="http://{{ exhibitor.web_url }}">{{ exhibitor.web_url }}</a>
+                    </h2>
+                    <p>Company Website</p>
+                </ion-item>
+            </ion-list>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list no-lines>
+                <ion-item>
+                    <button (click)="addNote()" type="button" color="orange" ion-button full>Add Notes</button>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

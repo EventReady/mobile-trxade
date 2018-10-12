@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-navbar color="primary" class="white-text">
+        <ion-title>My Notes</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-card *ngIf="loaded && data.list.length">
+        <ion-card-header>
+            <p>*Swipe left on the note to edit/delete.</p>
+        </ion-card-header>
+    </ion-card>
+    <ion-list *ngIf="loaded && data.list.length">
+        <ion-item-sliding *ngFor="let item of data.list">
+            <ion-item>
+                <p>
+                    <small>Category:
+						<strong>{{ item.note_type }}</strong>
+					</small>
+                </p>
+                <h2>{{ item.note }}</h2>
+                <p>
+                    <small>{{ item.created_date | date: "M/d/y" }} {{ item.created_date | date: "h:mm a" }}</small>
+                </p>
+            </ion-item>
+            <ion-item-options>
+                <button ion-button color="secondary" icon-left (click)="editNote(item.id, item.note, item.note_type)">
+					<ion-icon name="md-create"></ion-icon>
+					Edit
+				</button>
+                <button ion-button color="danger" icon-left (click)="deleteNote(item.id)">
+					<ion-icon name="md-trash"></ion-icon>
+					Delete
+				</button>
+            </ion-item-options>
+
+        </ion-item-sliding>
+    </ion-list>
+    <ion-card *ngIf="loaded && !data.list.length" color="danger" class="rainbow-content">
+        <ion-card-content>
+            <ion-card-title>
+                My Notes is Empty
+            </ion-card-title>
+            <p>
+                When you add a note(s), they appears here.
+            </p>
+        </ion-card-content>
+    </ion-card>
+    <p style="padding:10px;">
+        <button *ngIf="loaded && data.list.length" type="button" (click)="sendNotes()" ion-button full color="primary">Email
+			Me My Notes</button>
+    </p>
+</ion-content>
+<ion-footer padding>
+    <button type="button" (click)="back()" ion-button full color="primary">Back To Dashboard</button>
+</ion-footer>

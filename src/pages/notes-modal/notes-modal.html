@@ -1,0 +1,22 @@
+<ion-header no-border>
+    <ion-navbar color="light" class="white-text">
+        <ion-title>{{ noteType }} Note</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <form [formGroup]="notesForm" (submit)="saveNote()" novalidate>
+        <ion-list>
+            <ion-item>
+                <ion-textarea #note formControlName="note" [class.invalid]="!notesForm.controls.note.valid &&notesForm.controls.note.dirty" placeholder="Enter your note"></ion-textarea>
+            </ion-item>
+            <ion-item>
+                <button type="submit" ion-button full color="secondary">Submit</button>
+            </ion-item>
+            <ion-item>
+                <button type="button" (click)="close()" ion-button full color="danger">Cancel</button>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>

@@ -1,0 +1,55 @@
+<ion-header>
+	<ion-navbar color="primary" class="white-text">
+		<ion-title>Schedule Detail</ion-title>
+	</ion-navbar>
+</ion-header>
+
+
+<ion-content class="content" (ionScroll)="onScroll($event)" [class.transition]="transition">
+	<!--*********** Image header  ***********-->
+	<div class="detail-header">
+		<div class="background">
+			<h2 *ngIf="loaded" class="detail-name"> {{ detail.item }}</h2>
+		</div>
+	</div>
+
+	<!--***********  Description ***********-->
+	<ion-card>
+		<ion-card-header no-margin *ngIf="loaded">
+			<ion-list>
+				<ion-list-header>
+					<h2>Session Details</h2>
+				</ion-list-header>
+				<ion-item>
+					<ion-icon name="calendar" item-left></ion-icon>
+					<h2>{{ detail.start_date | date: "M/d/y" }} {{ detail.start_time | date: "h:mm a" }}</h2>
+					<p>Start Date/Time</p>
+				</ion-item>
+				<ion-item>
+					<ion-icon name="calendar" item-left></ion-icon>
+					<h2>{{ detail.start_date | date: "M/d/y" }} {{ detail.end_time | date: "h:mm a" }}</h2>
+					<p>End Date/Time</p>
+				</ion-item>
+				<ion-item>
+					<ion-icon name="ios-school" item-left></ion-icon>
+					<h2><a (click)="goToSpeaker( detail.speaker_id )">{{ detail.speaker_fname }} {{ detail.speaker_lname }}</a></h2>
+					<p>Speaker</p>
+				</ion-item>
+			</ion-list>
+		</ion-card-header>
+		<ion-card-content *ngIf="loaded">
+			<div [innerHTML]="detail.description"></div>
+			<ion-list>
+				<ion-item no-lines>
+					<button *ngIf="detail.session == 1" (click)="addToSchedule( detail.id )" type="button" color="primary" ion-button
+					 block>Add
+						to Schedule</button>
+					<button (click)="mySchedule()" type="button" color="green" ion-button block>My Schedule</button>
+					<button (click)="addNote()" type="button" color="orange" ion-button block>Add Notes</button>
+				</ion-item>
+				<ion-item>
+				</ion-item>
+			</ion-list>
+		</ion-card-content>
+	</ion-card>
+</ion-content>

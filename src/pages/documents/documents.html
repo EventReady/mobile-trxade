@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar color="primary" class="white-text">
+        <ion-title>Documents</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <!--*********** List  ***********-->
+    <ion-list *ngIf="loaded">
+        <ion-item tappable *ngFor="let item of files">
+            <ion-label>
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.description }}</p>
+            </ion-label>
+            <ion-note item-end>
+                <button ion-button icon-only tappable clear (click)="markAsFavorite( item.file_id )">
+					<ion-icon name="md-heart" *ngIf="visible.includes(item.file_id)"></ion-icon>
+					<ion-icon name="md-heart-outline" *ngIf="!visible.includes(item.file_id)"></ion-icon>
+				</button>
+            </ion-note>
+            <ion-note item-end>
+                <button ion-button icon-only tappable clear (click)="goToDetail( item.file_path )">
+					View
+				</button>
+            </ion-note>
+
+        </ion-item>
+        <ion-card *ngIf="loaded && !files.length" color="danger" class="rainbow-content">
+            <ion-card-content>
+                <ion-card-title>
+                    No Documents Available
+                </ion-card-title>
+            </ion-card-content>
+        </ion-card>
+    </ion-list>
+</ion-content>

@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar color="primary" class="white-text">
+        <ion-title>Share App</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+    <p padding>Enter a message to send this app to a friend. They will also recieve the download link to the app store.</p>
+    <form [formGroup]="messageForm" (ngSubmit)="submitForm(messageForm.value)">
+        <ion-list no-border>
+            <ion-item>
+                <ion-label floating>To Email:</ion-label>
+                <ion-input type="text" value="" [formControl]="messageForm.controls['email']" [ngClass]="{'error-border':!messageForm.controls['email'].valid}"></ion-input>
+                <div margin>
+                    <div class="error-box" *ngIf="messageForm.controls['email'].hasError('required') && messageForm.controls['email'].touched">* Email is required!</div>
+                    <div class="error-box" *ngIf="messageForm.controls['email'].hasError('pattern') && messageForm.controls['email'].touched">* Valid Email is required!</div>
+                </div>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>Your Message:</ion-label>
+                <ion-textarea type="text" row="10" [formControl]="messageForm.controls['body']" [ngClass]="{'error-border':!messageForm.controls['body'].valid}"></ion-textarea>
+                <div margin>
+                    <div class="error-box" *ngIf="messageForm.controls['body'].hasError('required') && messageForm.controls['body'].touched">* Message body is required!</div>
+                </div>
+            </ion-item>
+            <ion-item>
+                <button type="submit" color="orange" [disabled]="!messageForm.valid" ion-button full>Send Email</button>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>

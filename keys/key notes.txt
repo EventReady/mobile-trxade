@@ -1,0 +1,17 @@
+One Signal
+c91f3fee-599f-439d-84b4-e8d373e06b9c
+
+IOS
+p.12 password: ywrhvphbln
+
+
+Android
+https://documentation.onesignal.com/docs/generate-a-google-server-api-key
+Server Key
+AAAAL-sX2aQ:APA91bGLLfLtxlUiQeASNh7fdIoftJ10e7opEHVh3JnKnMTtDgEI6hwkCJiUc-wBAnJXa8-Z8awQzpsZi3L45Hnd66UDP_ud_CrnYLSqE_7EJ_h0xXUNvsVEZMAZaDcJ26q_g-kAr-Nz
+
+Legacy Server Key
+AIzaSyABZDUZByEhsFksY1JuxuJHjG1zD32cZII
+
+Firebase Sender ID
+205807671716

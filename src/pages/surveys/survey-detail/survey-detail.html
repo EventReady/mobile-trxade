@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-navbar color="primary" class="white-text">
+        <ion-title>Survey Question</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="content">
+    <ion-card>
+        <ion-card-header>
+            Survey Question
+        </ion-card-header>
+        <ion-card-content *ngIf="loaded">
+            <p>{{ question }}</p>
+        </ion-card-content>
+    </ion-card>
+    <form [formGroup]="surveyForm" (submit)="saveSurvey()" novalidate *ngIf="loaded">
+        <ion-list>
+            <ion-item>
+                <ion-textarea #answerField formControlName="question" [class.invalid]="!surveyForm.controls.question.valid && surveyForm.controls.question.dirty" placeholder="Enter your survey answer"></ion-textarea>
+            </ion-item>
+            <ion-item>
+                <button type="submit" ion-button full color="secondary">Submit</button>
+            </ion-item>
+            <ion-item>
+                <button type="button" (click)="close()" ion-button full color="danger">Cancel</button>
+            </ion-item>
+        </ion-list>
+    </form>
+
+</ion-content>

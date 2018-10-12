@@ -1,0 +1,51 @@
+<ion-header style="padding-bottom:0px; margin-bottom:0px; height:100px;">
+    <ion-navbar color="primary" class="white-text">
+        <ion-buttons start>
+            <button (click)="backToDashboard()" ion-button icon-only>
+				<ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon> Back
+			</button>
+        </ion-buttons>
+        <ion-title>Schedule</ion-title>
+    </ion-navbar>
+    <ion-toolbar no-border-top color="primary">
+        <ion-searchbar debounce="750" [showCancelButton]="true" (ionCancel)="cancelSearch( $event )" (ionInput)="getItems( $event )"></ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="padding-top:0px; margin-top:0px;">
+    <!--*********** List  ***********-->
+    <ion-list *ngIf="loaded">
+        <ion-item-group *ngFor="let group of schedules | groupBy: 'start_time'">
+            <ion-item-divider color="light" sticky>
+                {{ group.key | date: "h:mm a" }}
+            </ion-item-divider>
+            <button ion-item tappable *ngFor="let item of group.list" (click)="openSchedule( $event, item.session_id, item.agenda, item.session, item.activity )">
+				<p>
+					<small>{{ item.start_date | date: "M/d/y" }} {{ item.start_time | date: "h:mm a" }}</small>
+				</p>
+				<h2>{{ item.session_name }}</h2>
+				<p>
+					<em>{{ item.room }}</em>
+				</p>
+			</button>
+        </ion-item-group>
+
+    </ion-list>
+
+    <ion-list *ngIf="isSearching">
+        <button ion-item tappable *ngFor="let item of filteredList" (click)="openSchedule( $event, item.session_id, item.agenda, item.session , item.activity)">
+			<p>
+				<small>{{ item.start_date | date: "M/d/y" }} {{ item.start_time | date: "h:mm a" }}</small>
+			</p>
+			<h2>{{ item.session_name }}</h2>
+			<p>
+				<em>{{ item.room }}</em>
+			</p>
+		</button>
+    </ion-list>
+    <div *ngIf="loaded && schedules.length > 100">
+        <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more schedules..."></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+    </div>
+</ion-content>

@@ -1,0 +1,5 @@
+<ion-content>
+    <ion-tabs tabsPlacement="bottom">
+        <ion-tab *ngFor="let schedule of scheduleDays" [tabTitle]="schedule.day" [root]="schedule.tab"></ion-tab>
+    </ion-tabs>
+</ion-content>

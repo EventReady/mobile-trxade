@@ -1,0 +1,26 @@
+<ion-header>
+	<ion-navbar color="primary" class="white-text">
+		<ion-title>Sponsors</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<!--*********** List  ***********-->
+	<ion-list *ngIf="loaded">
+		<button ion-item ion-item tappable *ngFor="let item of sponsors" (click)="goToDetail( item.id )">
+			<ion-label>
+				<h2>{{ item.name }}</h2>
+				<p>{{ item.description | truncate: [100] }}</p>
+			</ion-label>
+		</button>
+	</ion-list>
+	<ion-card *ngIf="loaded && !sponsors.length" color="danger" class="rainbow-content">
+		<ion-card-content>
+			<ion-card-title>
+				No Available Sponsors
+			</ion-card-title>
+			<p>
+				There are no available sponsors at this time.
+			</p>
+		</ion-card-content>
+	</ion-card>
+</ion-content>

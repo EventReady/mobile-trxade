@@ -1,0 +1,151 @@
+<ion-header>
+    <ion-navbar color="primary" class="white-text">
+        <button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+        <ion-title *ngIf="!showSearch">{{ eventDesc }}</ion-title>
+        <ion-buttons *ngIf="!showSearch" end>
+            <button ion-button (click)="openAlerts()">
+				<ion-icon name="md-notifications"></ion-icon>
+			</button>
+            <button ion-button (click)="searchApp()">
+				<ion-icon name="md-search"></ion-icon>
+			</button>
+            <button ion-button (click)="openHelp()">
+				<ion-icon name="md-list-box"></ion-icon>
+			</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content class="has-header">
+    <div [ngStyle]="{ 'background-color':'#fff', 'min-height': dashboardBannerHeight}">
+        <ion-slides *ngIf="menuesLoaded && banners.length > 1" [autoplay]="dashboardBannerSpeed" loop="true" speed="1500" effect="fade">
+            <ion-slide *ngFor="let banner of banners">
+                <div class="header-title" title="{{ banner.title }}">
+                    <img [src]="banner.banner" width="100%" />
+                </div>
+            </ion-slide>
+        </ion-slides>
+        <div *ngIf="menuesLoaded && banners.length == 1">
+            <div *ngFor="let banner of banners" class="header-title" title="{{ banner.title }}">
+                <img [src]="banner.banner" width="100%" />
+            </div>
+        </div>
+    </div>
+    <!--//  ATTENDEE BUTTONS //-->
+    <div *ngIf="!isSpeaker && menuesLoaded">
+        <ion-grid id="main-nav-bar" no-padding>
+            <ion-row class="button-row" color="primary">
+                <ion-col *ngFor="let menu of attendeeMenu.featureRow" tappable no-padding (click)="goToPage( $event, menu.page )">
+                    <ion-icon [name]="menu.icon"></ion-icon>
+                    <span [innerHTML]="menu.title"></span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-grid id="button-section" class="grid-nav" no-padding>
+            <!--// row 1 //-->
+            <ion-row class="my-apps-section">
+                <ion-col *ngFor="let menu of attendeeMenu.row1" no-padding>
+                    <button (click)="goToPage( $event, menu.page )">
+						<ion-icon [name]="menu.icon"></ion-icon>
+						<p class="bottom-tag highlight-1" [innerHTML]="menu.title"></p>
+					</button>
+                </ion-col>
+            </ion-row>
+            <!--// row 2 //-->
+            <ion-row class="my-apps-section">
+                <ion-col *ngFor="let menu of attendeeMenu.row2" no-padding>
+                    <button (click)="goToPage( $event, menu.page )">
+						<ion-icon [name]="menu.icon"></ion-icon>
+						<p class="bottom-tag highlight-1" [innerHTML]="menu.title"></p>
+					</button>
+                </ion-col>
+            </ion-row>
+            <!--// row 3 //-->
+            <ion-row class="my-apps-section">
+                <ion-col *ngFor="let menu of attendeeMenu.row3" no-padding>
+                    <button (click)="goToPage( $event, menu.page )">
+						<ion-icon [name]="menu.icon"></ion-icon>
+						<p class="bottom-tag highlight-1" [innerHTML]="menu.title"></p>
+					</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <!--//  SPEAKER BUTTONS //-->
+    <div *ngIf="isSpeaker && menuesLoaded">
+        <ion-grid id="main-nav-bar" no-padding>
+            <ion-row class="button-row" color="primary">
+                <ion-col *ngFor="let menu of speakerMenu.featureRow" tappable no-padding (click)="goToPage( $event, menu.page )">
+                    <ion-icon [name]="menu.icon"></ion-icon>
+                    <span [innerHTML]="menu.title"></span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-grid id="button-section" class="grid-nav" no-padding>
+            <!--// row 1 //-->
+            <ion-row class="my-apps-section" style="margin:2px 0px;">
+                <ion-col *ngFor="let menu of speakerMenu.row1" no-padding>
+                    <button (click)="goToPage( $event, menu.page )">
+						<ion-icon [name]="menu.icon"></ion-icon>
+						<p class="bottom-tag highlight-1" [innerHTML]="menu.title"></p>
+					</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <ion-grid>
+        <ion-row class="info-block info-block-background" *ngIf="loaded && callout?.title" [ngStyle]="{'background-image': 'url(' + downloadUrl + callout?.img_url + ')'}">
+            <div class="background">
+                <h3>{{ callout?.title }}</h3>
+                <p>{{ callout?.description }}</p>
+                <div text-center>
+                    <button *ngIf="callout.internallink === 1" ion-button small color="primary" tappable (click)="goToPage( $event, callout?.button_link )">{{
+						callout?.button_text }}</button>
+                    <a *ngIf="callout?.externallink === 1" ion-button small color="primary" href="{{ callout?.button_link }}">{{
+						callout?.button_text }}</a>
+                </div>
+            </div>
+        </ion-row>
+
+        <ion-row class="callout-block" *ngIf="loaded && spotlight?.title">
+            <ion-col class="callout" style="padding-bottom: 18px;">
+                <h3 class="top-tag highlight-2 blue">{{ spotlight?.title }}</h3>
+                <div>
+                    <div class="callout-area callout-img" [ngStyle]="{'background-image': 'url(' + spotlight?.img_url + ')'}">
+                    </div>
+                    <p class="callout-name blue">{{ spotlight?.description }}</p>
+                    <button tappable class="view-info-btn dark" (click)="goToPage( $event, spotlight?.button_link )">{{
+						spotlight?.button_text }}</button>
+                </div>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="callout-block" *ngIf="menuesLoaded && venueMaps.length">
+            <ion-col class="callout" style="padding-bottom: 18px;">
+                <div>
+                    <h3 class="top-tag highlight-2 blue" style="position: relative;">Venue Maps</h3>
+                </div>
+                <div text-center>
+                    <div *ngFor="let map of venueMaps; let i = index">
+                        <img style="display: none" [src]="map.map" #i />
+                        <button ion-button small class="view-info-btn dark" color="primary" (click)="goToMap( i )">{{
+							map.title }}</button>
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-buttons style="text-align:center">
+            <button (click)="searchApp()" ion-button icon-right>
+				Search {{ eventName }}
+				<ion-icon name="md-search"></ion-icon>
+			</button>
+        </ion-buttons>
+
+    </ion-toolbar>
+</ion-footer>

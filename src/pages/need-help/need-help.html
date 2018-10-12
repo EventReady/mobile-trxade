@@ -1,0 +1,23 @@
+<ion-header>
+    <ion-navbar color="primary" class="white-text">
+        <ion-title>Need App Assistance</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+    <p padding>Let us know what issues or help you are in need of. We will get back to you ASAP.</p>
+    <form [formGroup]="messageForm" (ngSubmit)="submitForm(messageForm.value)">
+        <ion-list no-border>
+            <ion-item>
+                <ion-label floating>Your Message:</ion-label>
+                <ion-textarea type="text" row="10" [formControl]="messageForm.controls['body']" [ngClass]="{'error-border':!messageForm.controls['body'].valid}"></ion-textarea>
+                <div margin>
+                    <div class="error-box" *ngIf="messageForm.controls['body'].hasError('required') && messageForm.controls['body'].touched">* Message body is required!</div>
+                </div>
+            </ion-item>
+            <ion-item>
+                <button type="submit" color="orange" [disabled]="!messageForm.valid" ion-button full>Send Email</button>
+            </ion-item>
+        </ion-list>
+    </form>
+</ion-content>

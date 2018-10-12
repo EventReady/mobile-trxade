@@ -1,0 +1,20 @@
+schedule {
+    //********** Star rating  ************//
+    ul {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding: 0px;
+    }
+    ion-list {
+        margin-top: 0px !important;
+        padding-top: 0px !important
+    }
+    ion-tabs,
+    ion-tabs[tabs-only] {
+        margin-bottom: 0px !important
+    }
+    ion-content {
+        padding-top: 0px !important;
+        margin-top: 0px !important;
+    }
+}

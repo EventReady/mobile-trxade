@@ -1,0 +1,25 @@
+<ion-header>
+	<ion-navbar color="primary" class="white-text">
+		<ion-title>Attendee</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content fullscreen="true" no-padding>
+	<div class="profile-box">
+		<div text-center class="background" *ngIf="loaded">
+			<img src="https://mobile.eventready.com/files/eventready/nobody_m.original.gif" class="edit-avatar pop-in" alt="">
+			<p class="name-text">{{ attendee.first_name }} {{ attendee.last_name }}</p>
+		</div>
+	</div>
+	<div padding *ngIf="loaded">
+		<ion-list no-lines>
+			<ion-item>
+				<ion-icon name="ios-mail" item-left></ion-icon>
+				<h2>
+					<a (click)="contact(attendee.email)">{{ attendee.email }}</a>
+				</h2>
+				<p>E-mail</p>
+			</ion-item>
+		</ion-list>
+	</div>
+</ion-content>

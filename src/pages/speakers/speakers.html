@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-navbar color="primary" class="white-text">
+        <ion-title>Speakers</ion-title>
+    </ion-navbar>
+    <ion-toolbar no-border-top color="primary">
+        <ion-searchbar debounce="750" [showCancelButton]="true" (ionCancel)="cancelSearch( $event )" (ionInput)="getItems( $event )"></ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <!--*********** List  ***********-->
+    <ion-list *ngIf="loaded">
+        <button ion-item tappable *ngFor="let item of speakers" (click)="goToDetail(item.speaker_id )">
+			<p>
+				<small>{{ item.title }}</small>
+			</p>
+			<h2>{{ item.first_name }} {{ item.last_name }}</h2>
+			<p>
+				<em>{{ item.email }}</em>
+			</p>
+		</button>
+    </ion-list>
+
+    <ion-list *ngIf="isSearching">
+        <button ion-item tappable *ngFor="let item of filteredList" (click)="goToDetail( item.speaker_id )">
+			<p>
+				<small>{{ item.title }}</small>
+			</p>
+			<h2>{{ item.first_name }} {{ item.last_name }}</h2>
+			<p>
+				<em>{{ item.email }}</em>
+			</p>
+		</button>
+    </ion-list>
+</ion-content>

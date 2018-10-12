@@ -1,0 +1,39 @@
+<ion-header>
+	<ion-navbar color="primary" class="white-text">
+		<ion-title>Session Attendees</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content padding>
+	<h2>Attending Registrants</h2>
+	<p>Below you will find the current list of all attendee attending this session.</p>
+	<form>
+		<ion-label color="primary" stacked>Your Message</ion-label>
+		<ion-textarea style="border:1px solid #ccc; margin:5px 0; height:120px" #note placeholder="Enter your message here to send to the attending Registrants"></ion-textarea>
+		<button type="button" (click)="sendMessage(note)" ion-button full color="primary">Send Message To Attending
+			Registrants</button>
+	</form>
+	<ion-list no-lines text-wrap>
+		<ion-list-header>
+			<h3>Attendees</h3>
+		</ion-list-header>
+		<ion-card *ngIf="loaded && !attendees.length" color="danger" class="rainbow-content">
+			<ion-card-content>
+				<ion-card-title>
+					No Attendees
+				</ion-card-title>
+				<p>
+					There are no attending registrants for this session at this time.
+				</p>
+			</ion-card-content>
+		</ion-card>
+		<ion-item tappable *ngFor="let item of attendees">
+			<p>
+				<small>{{ item.company }}</small>
+			</p>
+			<h2>{{ item.first_name }} {{ item.last_name }}</h2>
+			<p>
+				<em>{{ item.email }}</em>
+			</p>
+		</ion-item>
+	</ion-list>
+</ion-content>

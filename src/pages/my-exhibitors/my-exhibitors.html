@@ -1,0 +1,32 @@
+<ion-header>
+	<ion-navbar color="primary" class="white-text">
+		<ion-title>My Exhibitors</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<!--*********** List  ***********-->
+	<ion-list *ngIf="loaded">
+		<ion-item *ngFor="let item of exhibitors">
+			<ion-label>
+				<h2>{{ item.exhibitor }}</h2>
+				<p>Booth Number {{ item.booth_number }}</p>
+			</ion-label>
+			<ion-note item-end>
+				<button ion-button icon-only tappable clear (click)="goToDetail( item.exhib_id )">
+					View
+				</button>
+			</ion-note>
+		</ion-item>
+	</ion-list>
+	<ion-card color="danger" class="rainbow-content" *ngIf="loaded && exhibitors.length === 0">
+		<ion-card-content>
+			<ion-card-title>
+				No Favorite Exhibitors
+			</ion-card-title>
+			<p>
+				When you add exhibitors, they appears here.
+			</p>
+		</ion-card-content>
+	</ion-card>
+
+</ion-content>

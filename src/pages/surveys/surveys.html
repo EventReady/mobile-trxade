@@ -1,0 +1,19 @@
+<ion-header>
+	<ion-navbar color="primary" class="white-text">
+		<ion-title>Survey Questions</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<p>
+		{{ surveyMessage }}
+	</p>
+	<ion-list *ngIf="loaded">
+		<button ion-item tappable *ngFor="let item of surveys1" (click)="goToDetail( item.id, item.survey_question )">
+			<p>{{ item.survey_question }}</p>
+		</button>
+		<button ion-item tappable *ngFor="let item of surveys2" (click)="goToDetail( item.id, item.survey_question )">
+			<p>{{ item.survey_question }}</p>
+		</button>
+	</ion-list>
+</ion-content>

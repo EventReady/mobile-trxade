@@ -1,0 +1,104 @@
+<ion-menu [content]="content" persistent="true">
+    <ion-content>
+        <!--***********  Side menu for android ***********-->
+        <div *ngIf="menuesLoaded" class="menu-material" showWhen="android">
+            <!--***********  Menu for android  ***********-->
+            <div class="list-box">
+                <!--***********  menu ***********-->
+                <ion-list no-lines>
+                    <div *ngFor="let p of pages">
+                        <button ion-item menuClose (click)="openPage(p)">
+							<ion-icon [name]="p.icon" color="gray" item-left></ion-icon>
+							{{p.title}}
+						</button>
+                    </div>
+                    <div *ngFor="let d of menu">
+                        <button ion-item tappable (click)="toggleDetails(d)">
+							<ion-icon color="gray" [name]="d.iconLeft" item-left></ion-icon>
+							{{d.title}}
+							<ion-icon item-right [name]="d.icon"></ion-icon>
+						</button>
+                    </div>
+                    <div>
+                        <button ion-item menuClose (click)="logout()">
+							<ion-icon tappable name="done-all" color="gray" item-left></ion-icon>
+							Logout
+						</button>
+                    </div>
+                </ion-list>
+            </div>
+        </div>
+        <!--***********  Header for ios ***********-->
+        <div *ngIf="menuesLoaded" id="menu-ios" showWhen="ios" class="sideMenu-header" color="gray">
+            <!--***********  menu ***********-->
+            <ion-list no-lines>
+                <div *ngFor="let p of pages">
+                    <button ion-item menuClose (click)="openPage(p)">
+						<ion-icon [name]="p.icon" color="gray" item-left></ion-icon>
+						{{p.title}}
+					</button>
+                </div>
+                <div *ngFor="let d of menu">
+                    <button ion-item tappable (click)="toggleDetails(d)">
+						<ion-icon color="gray" [name]="d.iconLeft" item-left></ion-icon>
+						{{d.title}}
+						<ion-icon item-right [name]="d.icon"></ion-icon>
+					</button>
+                </div>
+                <div>
+                    <button ion-item menuClose (click)="logout()">
+						<ion-icon tappable name="done-all" color="gray" item-left></ion-icon>
+						Logout
+					</button>
+                </div>
+            </ion-list>
+        </div>
+        <!--***********  Side menu for PWA ***********-->
+        <div *ngIf="menuesLoaded" id="menu-pwa" hideWhen="android,ios">
+            <div class="list-box">
+                <!--***********  menu ***********-->
+                <ion-list no-lines>
+                    <div *ngFor="let p of pages">
+                        <button ion-item menuClose (click)="openPage(p)">
+							<ion-icon [name]="p.icon" color="gray" item-left></ion-icon>
+							{{p.title}}
+						</button>
+                    </div>
+                    <div *ngFor="let d of menu">
+                        <button ion-item tappable (click)="toggleDetails(d)">
+							<ion-icon color="gray" [name]="d.iconLeft" item-left></ion-icon>
+							{{d.title}}
+							<ion-icon item-right [name]="d.icon"></ion-icon>
+						</button>
+                    </div>
+                    <div>
+                        <button ion-item menuClose (click)="logout()">
+							<ion-icon tappable name="done-all" color="gray" item-left></ion-icon>
+							Logout
+						</button>
+                    </div>
+                </ion-list>
+            </div>
+        </div>
+    </ion-content>
+</ion-menu>
+<!--
+<ion-menu [content]="content" side="right" id="side-menu" persistent="true">
+    <ion-content *ngIf="loaded">
+        <div class="menu-material">
+            <div class="menu-header">
+                <p class="name">{{ profile.first_name }} {{ profile.last_name }}</p>
+                <p class="email">{{ profile.email }}</p>
+                <p>Some other important text here</p>
+            </div>
+            <ion-list padding>
+                <button ion-button menuClose block color="blue2" (click)="logout()">
+					Logout
+				</button>
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-menu>
+-->
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
